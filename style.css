@@ -18,7 +18,9 @@ button+button,
   width: 230px;
   border-radius: 7px;
   padding: 10px;
-  margin: 10px
+  margin: 15px auto;
+ 
+	  
 }
 
 .calc {
@@ -32,8 +34,10 @@ button+button,
 
 .display {
   text-align: right;
-  margin: 5px;
-  ;
+  margin-top: 20px;
+ 
+  border-radius: 5px;
+ /* pointer-events: none;*/
 }
 
 .row {
@@ -79,7 +83,7 @@ button+button,
   height: 117px;
 }
 
-#zero {
+#num0 {
   width: 110px;
 }
 
