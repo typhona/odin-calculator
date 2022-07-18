@@ -2,10 +2,11 @@
 let num1;
 let num2;
 let operator;
+let operand;
 let result;
 let prevFunc = "FALSE";
 let solved = "FALSE";
-let funcSet ='FALSE';
+let funcSet ="FALSE";
 let numBtns = document.querySelectorAll('.pad');
 let funcBtns = document.querySelectorAll('.func_pad');
 let display = document.querySelector('.display') ;
@@ -19,12 +20,19 @@ function setFuncs() {
     for(let j =0; j < funcBtns.length; j++) {
 	funcBtns[j].addEventListener("click", function() {
 	    operator = operators[j];
-	    funcSet= 'TRUE';
-	    getOp();
+	    if(funcSet == "TRUE") {
+		
+		getOp();
+		operate(num1, num2, prevFunc);
+
+	    } else {
+		funcSet= 'TRUE';
+		getOp();
+	    }
 	});
     }
 }
-setFuncs();
+
 
 // get the value and setup the action from the button
 
@@ -42,9 +50,9 @@ function getOp() {
     } else if(operator=="EQUAL") {
 	operate(num1, num2, operand);
 	funcSet = "FALSE";
-    } else {
+    }  else {
 	operand = operator;
-	num1=parseInt(display.innerHTML);
+//	num1=parseInt(display.innerHTML);
     }  
 }
 
@@ -56,11 +64,15 @@ function setNums() {
     for (let i =0; i < numBtns.length; i++) {
 	numBtns[i].addEventListener("click", function() {
 	    if(funcSet=="TRUE") {
-		num2 = parseInt(numBtns[i].innerHTML);
+		num1 = parseFloat(display.innerHTML);
+		num2 = parseFloat(numBtns[i].innerHTML);
+		console.log(num2);
 		display.innerHTML = num2;
+	//	display.innerHTML += num2;
+		prevFunc = operand;
 		    } else {
-		num1 = parseInt(numBtns[i].innerHTML);
-		if (parseInt(display.innerHTML) != 0) {
+		num1 = parseFloat(numBtns[i].innerHTML);
+		if (parseFloat(display.innerHTML) != 0) {
 		    display.innerHTML += num1;
 		} else {
 		    display.innerHTML = num1;
@@ -71,11 +83,11 @@ function setNums() {
 		}
 
     } else {
-	num1 = parseInt(display.innerHTML);
+//	num1 = parseFloat(display.innerHTML);
     }
 }
 
-setNums();
+
 
 // access the display		
 
@@ -104,11 +116,19 @@ function operate(num1, num2, operand) {
 
     // console.log(result);
     console.log(num1);
-    console.log(operand);
-    console.log(num2);
+    console.log(prevFunc);
     console.log(operator);
+    console.log(num2);
+    console.log(operand);
     console.log(result);
     num1 = result;
-    console.log("******");
+    console.log('******');
     console.log(num1);
 }
+
+
+
+// Function Calls
+
+setNums();
+setFuncs();
